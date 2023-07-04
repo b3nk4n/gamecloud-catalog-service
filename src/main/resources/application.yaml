@@ -10,3 +10,6 @@ server:
 recommendation:
   game-genre: SPORTS
   game-title: FIFA 23
+
+feature-flags:
+  in-memory-storage: true

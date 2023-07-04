@@ -30,6 +30,11 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
+bootRun {
+    // active the demo profile when using the bootRun command during local development
+    systemProperty 'spring.profiles.active', 'demo'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

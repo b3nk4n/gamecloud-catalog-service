@@ -1,6 +1,7 @@
 package de.b3nk4n.gamecloud.catalogservice.repository;
 
 import de.b3nk4n.gamecloud.catalogservice.model.Game;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
+@ConditionalOnProperty(name = "feature-flags.in-memory-storage", havingValue = "true")
 public class InMemoryGameRepository implements GameRepository {
     private static final Map<String, Game> gamesById = new ConcurrentHashMap<>();
 
