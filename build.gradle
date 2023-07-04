@@ -15,11 +15,19 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    compileOnly {
+        // annotations require a `./gradlew clean build` to trigger metadata generation to take effect as intelli sense in IDE
+        extendsFrom annotationProcessor
+    }
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {

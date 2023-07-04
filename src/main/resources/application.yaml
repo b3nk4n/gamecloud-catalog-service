@@ -6,3 +6,7 @@ server:
     threads:
       max: 64
       min-spare: 4
+
+recommendation:
+  game-genre: SPORTS
+  game-title: FIFA 23
