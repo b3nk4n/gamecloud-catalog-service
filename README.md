@@ -7,13 +7,13 @@ by [Thomas Vitale](https://www.thomasvitale.com).
 
 ## Useful Commands
 
-| Gradle Command	         | Description                                   |
-|:---------------------------|:----------------------------------------------|
-| `./gradlew bootRun`        | Run the application.                          |
-| `./gradlew build`          | Build the application.                        |
-| `./gradlew test`           | Run tests.                                    |
-| `./gradlew bootJar`        | Package the application as a JAR.             |
-| `./gradlew bootBuildImage` | Package the application as a container image. |
+| Gradle Command	         | Description                                                    |
+|:---------------------------|:---------------------------------------------------------------|
+| `./gradlew bootRun`        | Run the application.                                           |
+| `./gradlew build`          | Build the application.                                         |
+| `./gradlew test`           | Run all tests.                                                 |
+| `./gradlew bootJar`        | Package the application as a JAR.                              |
+| `./gradlew bootBuildImage` | Package the application as a container image using Buildpacks. |
 
 After building the application, you can also run it from the Java CLI:
 
@@ -38,6 +38,11 @@ docker run --rm --name catalog-service -p 8080:8080 catalog-service:0.0.1-SNAPSH
 | `docker remove catalog-service` | Remove container. |
 
 ## Kubernetes tasks
+
+As a prerequisite, if not yet present, create a namespace for GameCloud using `kubectl`:
+```bash
+kubectl create namespace gamecloud
+```
 
 ### Create Deployment for application container
 
