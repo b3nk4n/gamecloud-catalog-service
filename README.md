@@ -5,6 +5,22 @@ the available games in the catalog. The project was created based on a similar p
 [Cloud Native Spring in Action](https://www.manning.com/books/cloud-native-spring-in-action) book
 by [Thomas Vitale](https://www.thomasvitale.com).
 
+## Prerequisites
+
+```bash
+# Kubernetes CLI
+brew install kubectl
+
+# Minikube to run a Kubernetes cluster locally 
+brew install minikube
+minikube config set driver docker
+minikube start
+
+# Grype for code vulnerability scanning
+brew tap anchore/grype
+brew install grype
+```
+
 ## Useful Commands
 
 | Gradle Command	         | Description                                                    |
