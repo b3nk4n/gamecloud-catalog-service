@@ -15,6 +15,7 @@ import static org.mockito.BDDMockito.given;
 @WebMvcTest(GameCatalogController.class)
 class GameCatalogControllerMvcTest {
     @Autowired
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     MockMvc mockedController;
 
     @MockBean
