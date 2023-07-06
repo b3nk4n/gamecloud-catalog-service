@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import de.b3nk4n.gamecloud.catalogservice.model.GameGenre;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("recommendation")
+@ConfigurationProperties("recommendation") // listens to RefreshScopeRefreshedEvent by default via Spring Actuator
 public class RecommendationConfig {
     /**
      * The owner's most favorite and generally recommended game title.

@@ -89,3 +89,12 @@ kubectl delete deployment --namespace gamecloud catalog-service
 ```bash
 kubectl delete service --namespace gamecloud catalog-service
 ```
+
+### Manually trigger config update via Spring Actuator
+
+The following requires a running instance of [config-service}(https://github.com/b3nk4n/gamecloud-config-service),
+which is where the configuration is pulled from.
+
+```bash
+http POST :9001/actuator/refresh
+```
