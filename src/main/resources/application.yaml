@@ -9,7 +9,18 @@ server:
 
 recommendation:
   game-genre: SPORTS
-  game-title: FIFA 23
+  game-title: NHL 23
 
 feature-flags:
   in-memory-storage: true
+
+spring:
+  application:
+    name: catalog-service
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8888
+      request-connect-timeout: 5000
+      request-read-timeout: 3000

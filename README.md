@@ -1,4 +1,4 @@
-# Catalog Service
+# GameCloud Catalog Service
 
 This application is part of the GameCloud system and provides the functionality for managing
 the available games in the catalog. The project was created based on a similar project of the
