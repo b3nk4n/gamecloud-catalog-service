@@ -98,3 +98,17 @@ which is where the configuration is pulled from.
 ```bash
 http POST :9001/actuator/refresh
 ```
+
+### Manually running a backing data service
+
+If catalog-service is running locally with `feature-flag.in-memory-storage=false` as standalone,
+then you can spin up a Postgres database using the following command:
+
+```bash
+docker run -d --name gamecloud-postgres \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=gamecloud_catalog \
+  -p 5432:5432 \
+  postgres:15.3
+```

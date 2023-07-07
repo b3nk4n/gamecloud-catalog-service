@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @Tag("IntegrationTest")
+@ActiveProfiles("test")
 class CatalogServiceApplicationTests {
 
     @Autowired
@@ -21,16 +23,15 @@ class CatalogServiceApplicationTests {
 
     @Test
     void whenPostRequestThenGameCreated() {
-        var expectedGame = new Game("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+        var expectedGame = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
 
         webClient.post()
                 .uri("/games")
                 .bodyValue(expectedGame)
                 .exchange()
                 .expectStatus().isCreated()
-                .expectBody(Game.class).value(actualGame -> {
-                    assertThat(actualGame).isEqualTo(expectedGame);
-                });
+                .expectBody(Game.class).value(actualGame ->
+                        assertThat(actualGame).isEqualTo(expectedGame));
     }
 
 }

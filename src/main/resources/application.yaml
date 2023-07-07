@@ -12,7 +12,7 @@ recommendation:
   game-title: NHL 23
 
 feature-flags:
-  in-memory-storage: true
+  in-memory-storage: false
 
 spring:
   application:
@@ -24,12 +24,22 @@ spring:
       uri: http://localhost:8888
       request-connect-timeout: 5000
       request-read-timeout: 3000
-      fail-fast: true
+      fail-fast: false
       retry:
         max-attempts: 5
         initial-interval: 1000
         max-interval: 5000
         multiplier: 1.5
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:5432/gamecloud_catalog
+    hikari:
+      connection-timeout: 3000
+      maximum-pool-size: 8
+  sql:
+    init:
+      mode: always  # to initialize the db from resources/schema.sql
 
 management:
   endpoints:

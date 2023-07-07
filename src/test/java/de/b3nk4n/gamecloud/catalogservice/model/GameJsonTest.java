@@ -15,7 +15,7 @@ class GameJsonTest {
 
     @Test
     void serializeValidGame() throws Exception {
-        var book = new Game("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+        var book = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
         var jsonContent = jsonTester.write(book);
         assertThat(jsonContent).extractingJsonPathStringValue("@.id")
                 .isEqualTo(book.id());
@@ -33,7 +33,7 @@ class GameJsonTest {
     void deserializeValidGame() throws Exception {
         var content = """
                 {
-                  "id": "1234",
+                  "gameId": "1234",
                   "title": "FIFA 23",
                   "genre": "SPORTS",
                   "publisher": "EA Sports",
@@ -42,7 +42,7 @@ class GameJsonTest {
                 """;
         assertThat(jsonTester.parse(content))
                 .usingRecursiveComparison()
-                .isEqualTo(new Game("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99));
+                .isEqualTo(Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99));
     }
 
 }

@@ -18,7 +18,7 @@ class GameValidationTest {
 
     @Test
     void whenAllFieldCorrectThenValidationSuccess() {
-        var game = new Game("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+        var game = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
         var validationResults = validator.validate(game);
 
         assertThat(validationResults).isEmpty();
@@ -26,7 +26,7 @@ class GameValidationTest {
 
     @Test
     void whenTitleIsMissingThenValidationFailure() {
-        var game = new Game("1234", "", GameGenre.SPORTS, "EA Sports", 39.99);
+        var game = Game.of("1234", "", GameGenre.SPORTS, "EA Sports", 39.99);
         var validationResults = validator.validate(game);
 
         assertThat(validationResults).hasSize(1);
