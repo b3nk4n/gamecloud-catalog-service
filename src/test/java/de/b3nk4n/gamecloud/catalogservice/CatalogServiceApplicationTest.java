@@ -11,12 +11,10 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("integrationtest")
 @Tag("IntegrationTest")
-@ActiveProfiles("test")
-class CatalogServiceApplicationTests {
+class CatalogServiceApplicationTest {
 
     @Autowired
     WebTestClient webClient;
@@ -30,8 +28,15 @@ class CatalogServiceApplicationTests {
                 .bodyValue(expectedGame)
                 .exchange()
                 .expectStatus().isCreated()
-                .expectBody(Game.class).value(actualGame ->
-                        assertThat(actualGame).isEqualTo(expectedGame));
+                .expectBody(Game.class).value(actualGame -> {
+                    assertThat(actualGame)
+                            .usingRecursiveComparison().ignoringFields("id", "created", "lastModified", "version")
+                            .isEqualTo(expectedGame);
+                    assertThat(actualGame.id()).isNotNull();
+                    assertThat(actualGame.created()).isNotNull();
+                    assertThat(actualGame.lastModified()).isNotNull();
+                    assertThat(actualGame.version()).isNotNull();
+                });
     }
 
 }

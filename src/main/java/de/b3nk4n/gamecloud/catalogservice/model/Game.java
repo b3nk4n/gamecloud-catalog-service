@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.Version;
 
-import java.time.Instant;
+import java.util.Date;
 
 public record Game(
         /*
@@ -32,9 +32,9 @@ public record Game(
         @PositiveOrZero(message = "Game price must be positive or free.")
         double price,
         @CreatedDate
-        Instant created,
+        Date created,
         @LastModifiedDate
-        Instant lastModified,
+        Date lastModified,
         @Version
         int version
 ) {
