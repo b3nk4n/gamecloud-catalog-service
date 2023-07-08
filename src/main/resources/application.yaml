@@ -37,9 +37,9 @@ spring:
     hikari:
       connection-timeout: 3000
       maximum-pool-size: 8
-  sql:
-    init:
-      mode: always  # to initialize the db from resources/schema.sql
+#  sql:
+#    init:
+#      mode: always  # to initialize the db from resources/schema.sql
 
 management:
   endpoints:
