@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJdbcTest // each test runs in a transaction and changes are rolled back to keep the database clean
@@ -20,6 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("integrationtest")
 @Tag("IntegrationTest")
 class GameRepositoryTest {
+    private static final Game testGame = Game.of(UUID.randomUUID().toString(), "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+
     @Autowired
     private GameRepository gameRepository;
 
@@ -29,19 +33,17 @@ class GameRepositoryTest {
 
     @Test
     void findGameByGameIdWhenExisting() {
-        var game = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
-        jdbcDb.insert(game);
+        var createdGame = jdbcDb.insert(testGame);
 
-        var actual = gameRepository.findByGameId(game.gameId());
+        var actual = gameRepository.findByGameId(createdGame.gameId());
 
         assertThat(actual).isPresent();
-        assertThat(actual.get().gameId()).isEqualTo(game.gameId());
+        assertThat(actual.get().gameId()).isEqualTo(testGame.gameId());
     }
 
     @Test
     void findGameByIdWhenExisting() {
-        var game = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
-        var createdGame = jdbcDb.insert(game);
+        var createdGame = jdbcDb.insert(testGame);
 
         var actual = gameRepository.findById(createdGame.id());
 

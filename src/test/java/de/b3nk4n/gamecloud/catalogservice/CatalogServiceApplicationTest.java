@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -21,7 +23,7 @@ class CatalogServiceApplicationTest {
 
     @Test
     void whenPostRequestThenGameCreated() {
-        var expectedGame = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+        var expectedGame = Game.of(UUID.randomUUID().toString(), "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
 
         webClient.post()
                 .uri("/games")
