@@ -17,7 +17,8 @@ public class DemoDataLoader {
     private static final Collection<Game> dummyGames = List.of(
             Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99),
             Game.of("2345", "Pacman", GameGenre.ARCADE, "Atari", 3.95),
-            Game.of("3456", "Counterstrike", GameGenre.FPS, "Valve", 19.90)
+            Game.of("3456", "Counterstrike", GameGenre.FPS, "Valve", 19.90),
+            Game.of("4567", "F1 23", GameGenre.RACING, "EA Sports", 49.90)
     );
 
     private final GameRepository gameRepository;

@@ -21,6 +21,9 @@ minikube start --cpus 2 --memory 4g --driver docker --profile gamecloud
 # Grype for code vulnerability scanning
 brew tap anchore/grype
 brew install grype
+
+# Tilt for local development with k8s and minikube
+brew install tilt-dev/tap/tilt
 ```
 
 ## Useful Commands
@@ -71,7 +74,7 @@ minikube start --profile gamecloud
 
 This allows you to omit the `--namespace gamecloud` the the following commands below.
 
-# Load a local image into minikube
+### Load a local image into minikube
 
 ```bash
 ./gradlew bootBuildImage
@@ -133,7 +136,7 @@ which is where the configuration is pulled from.
 http POST :9001/actuator/refresh
 ```
 
-### Manually running a backing data service
+## Manually running a backing data service
 
 If catalog-service is running locally with `feature-flag.in-memory-storage=false` as standalone,
 then you can spin up a Postgres database using the following command:
@@ -145,4 +148,19 @@ docker run -d --name gamecloud-postgres \
   -e POSTGRES_DB=gamecloud_catalog \
   -p 5432:5432 \
   postgres:15.3
+```
+
+## Local development using Tilt
+
+To simplify local development, a `Tiltfile` is provided, which can be used via the following command
+to deploy and start the application:
+
+```bash
+tilt up
+```
+
+To undeploy the application and delete the respective Kubernetes resources:
+
+```bash
+tilt down
 ```
