@@ -17,13 +17,6 @@ minikube config set driver docker
 minikube start
 # Alternatively, set the params when starting minikube
 minikube start --cpus 2 --memory 4g --driver docker --profile gamecloud
-
-# Grype for code vulnerability scanning
-brew tap anchore/grype
-brew install grype
-
-# Tilt for local development with k8s and minikube
-brew install tilt-dev/tap/tilt
 ```
 
 ## Useful Commands
@@ -150,10 +143,17 @@ docker run -d --name gamecloud-postgres \
   postgres:15.3
 ```
 
-## Local development using Tilt
+## Local development and tools
 
-To simplify local development, a `Tiltfile` is provided, which can be used via the following command
-to deploy and start the application:
+### Hot deployment using Tilt
+
+To simplify local development, a `Tiltfile` is provided. [Tilt](https://tilt.dev/) can be installed e.g. using the following command on macOS.
+
+```bash
+brew install tilt-dev/tap/tilt
+```
+
+Then use the following command to deploy and start the application:
 
 ```bash
 tilt up
@@ -163,4 +163,42 @@ To undeploy the application and delete the respective Kubernetes resources:
 
 ```bash
 tilt down
+```
+
+### Visualizing k8s workloads using Octant
+
+[Octant](https://octant.dev/) is an open source developer-centric web interface for Kubernetes that lets you inspect
+a Kubernetes cluster and its applications.
+
+```bash
+brew install octant
+```
+
+To visualize the workloads of the k8s cluster in context (`kubectx` or `kubectl config current-context`) in the browser:
+
+```bash
+octant
+```
+
+### Vulnerability scanning using Grype
+
+[Grype](https://github.com/anchore/grype) enables scanning of static code and container images for vulnerabilities.
+
+To install on macOS, use the following:
+
+```bash
+brew tap anchore/grype
+brew install grype
+```
+
+To scan all the resources (jar, images) contained in the current work directory can be scanned as follows.
+
+```bash
+grype .
+```
+
+Finally, a specific container that was built using `./gradlew bootBuildImage` can be scanned using the following command.
+
+```bash
+grype gamecloud-catalog-service
 ```
