@@ -6,6 +6,7 @@ server:
     threads:
       max: 64
       min-spare: 4
+  shutdown: graceful
 
 recommendation:
   game-genre: SPORTS
@@ -17,6 +18,8 @@ feature-flags:
 spring:
   application:
     name: catalog-service
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
   config:
     import: "optional:configserver:"
   cloud:
