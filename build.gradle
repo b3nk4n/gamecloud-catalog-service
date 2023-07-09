@@ -49,6 +49,20 @@ dependencyManagement {
     }
 }
 
+// configure Buildpacks
+bootBuildImage {
+    imageName = "gamecloud-${project.name}"
+    environment = ["BP_JVM_VERSION": "17.*"]
+
+    docker {
+        publishRegistry {
+            username = project.findProperty("registryUsername")
+            password = project.findProperty("registryToken")
+            url = project.findProperty("registryUrl")
+        }
+    }
+}
+
 bootRun {
     // active the demo profile when using the bootRun command during local development
     systemProperty 'spring.profiles.active', 'demo'
