@@ -42,13 +42,13 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - name: Validate Kubernetes manifests
-        uses: stefanprodan/kube-tools@v
+      - uses: alexellis/arkade-get@master
         with:
-          kubectl: 1.27.3
+          kubectl: v1.25.0
           kubeval: 0.16.1
-          command: |
-            kubeval --strict -d k8s
+      - name: Validate Kubernetes manifests
+        run: |
+          kubeval --strict -d dev/k8s
   package:
     name: Package and Publish
     if: ${{ github.ref == 'refs/heads/main' }}
