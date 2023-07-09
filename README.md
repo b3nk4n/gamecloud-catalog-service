@@ -15,6 +15,8 @@ brew install kubectl
 brew install minikube
 minikube config set driver docker
 minikube start
+# Alternatively, set the params when starting minikube
+minikube start --cpus 2 --memory 4g --driver docker --profile gamecloud
 
 # Grype for code vulnerability scanning
 brew tap anchore/grype
@@ -60,6 +62,22 @@ As a prerequisite, if not yet present, create a namespace for GameCloud using `k
 kubectl create namespace gamecloud
 ```
 
+Alternatively, instead of using the default cluster (_minikube_) using a _gamecloud_ namespace,
+you could also create a _gamecloud_ cluster using `minikube`.
+
+```bash
+minikube start --profile gamecloud
+```
+
+This allows you to omit the `--namespace gamecloud` the the following commands below.
+
+# Load a local image into minikube
+
+```bash
+./gradlew bootBuildImage
+minikube image load gamecloud-catalog-service --profile gamecloud
+```
+
 ### Create Deployment for application container
 
 ```bash
@@ -78,6 +96,14 @@ kubectl expose deployment catalog-service --namespace gamecloud --name=catalog-s
 kubectl port-forward --namespace gamecloud service/catalog-service 8000:8080
 ```
 
+And then visit http://localhost:8000/games.
+
+### Get all related resources of this app
+
+```bash
+kubectl get all -l app=catalog-service
+```
+
 ### Delete Deployment for application container
 
 ```bash
@@ -88,6 +114,14 @@ kubectl delete deployment --namespace gamecloud catalog-service
 
 ```bash
 kubectl delete service --namespace gamecloud catalog-service
+```
+
+### Stop the minikube cluster
+
+```bash
+minikube stop
+# Alternatively, when a separate profile (cluster) is used
+minikube stop --profile gamecloud
 ```
 
 ### Manually trigger config update via Spring Actuator
