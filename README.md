@@ -202,3 +202,19 @@ Finally, a specific container that was built using `./gradlew bootBuildImage` ca
 ```bash
 grype gamecloud-catalog-service
 ```
+
+### Validate k8s YAML using Kubeval
+
+[Kubeval](www.kubeval.com) is a tool that can be used to validate the YAML of your Kubernetes declarations.
+Install it on macOS using the following command.
+
+```bash
+brew tap instrumenta/instrumenta
+$ brew install kubeval
+```
+
+And the validation can be performed as follows.
+
+```bash
+kubeval --strict -d dev/k8s
+```
