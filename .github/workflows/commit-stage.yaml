@@ -42,11 +42,12 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - uses: alexellis/arkade-get@master
+      - name: Get K8s Tools
+        uses: alexellis/arkade-get@master
         with:
           kubectl: v1.25.0
           kubeval: v0.16.1
-      - name: Validate Kubernetes manifests
+      - name: Validate Kubernetes Manifests
         run: |
           kubeval --strict -d dev/k8s
   package:

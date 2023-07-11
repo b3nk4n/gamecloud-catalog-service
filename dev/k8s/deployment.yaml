@@ -31,5 +31,7 @@ spec:
               value: "50"
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://gamecloud-postgres/gamecloud_catalog
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-service
             - name: SPRING_PROFILES_ACTIVE
               value: demo
