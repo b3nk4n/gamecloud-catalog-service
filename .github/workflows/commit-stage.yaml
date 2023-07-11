@@ -45,7 +45,7 @@ jobs:
       - uses: alexellis/arkade-get@master
         with:
           kubectl: v1.25.0
-          kubeval: 0.16.1
+          kubeval: v0.16.1
       - name: Validate Kubernetes manifests
         run: |
           kubeval --strict -d dev/k8s
