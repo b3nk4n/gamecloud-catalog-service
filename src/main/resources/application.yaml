@@ -40,6 +40,11 @@ spring:
     hikari:
       connection-timeout: 3000
       maximum-pool-size: 8
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/GameCloud
 #  sql:
 #    init:
 #      mode: always  # to initialize the db from resources/schema.sql

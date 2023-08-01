@@ -62,6 +62,7 @@ Alternatively, instead of using the default cluster (_minikube_) using a _gamecl
 you could also create a _gamecloud_ cluster using `minikube`.
 
 ```bash
+minikube addons enable ingress --profile gamecloud
 minikube start --profile gamecloud
 ```
 
@@ -205,7 +206,7 @@ grype gamecloud-catalog-service
 
 ### Validate k8s YAML using Kubeval
 
-[Kubeval](www.kubeval.com) is a tool that can be used to validate the YAML of your Kubernetes declarations.
+[Kubeval](http://kubeval.com) is a tool that can be used to validate the YAML of your Kubernetes declarations.
 Install it on macOS using the following command.
 
 ```bash
