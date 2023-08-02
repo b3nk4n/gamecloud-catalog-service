@@ -54,3 +54,10 @@ management:
     web:
       exposure:
         include: refresh
+
+# to enable Spring logs, which can be helpful when debugging. Such as, why the JWT claim conversion did not work
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: TRACE
