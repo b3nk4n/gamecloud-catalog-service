@@ -42,6 +42,8 @@ public class GameService {
                                 game.price(),
                                 prevGame.created(),
                                 prevGame.lastModified(), // will be updated automatically
+                                prevGame.creator(),
+                                prevGame.lastModifier(), // will be updated automatically
                                 prevGame.version() // will be incremented automatically
                         )))
                 .orElseGet(() -> addGame(game));

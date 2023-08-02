@@ -28,6 +28,10 @@ class GameCatalogControllerMvcTest {
     @MockBean
     GameService mockedGameService;
 
+    /**
+     * Mock the {@link JwtDecoder} so that the application does not try to call Keycloak and get the public key
+     * for decoding the Access Token.
+     */
     @MockBean
     JwtDecoder jwtDecoder;
 

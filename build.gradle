@@ -43,8 +43,8 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation "com.github.dasniko:testcontainers-keycloak:${testKeycloakVersion}"
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 dependencyManagement {

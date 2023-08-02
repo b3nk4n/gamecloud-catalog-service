@@ -5,10 +5,7 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
+import org.springframework.data.annotation.*;
 
 import java.util.Date;
 
@@ -35,10 +32,14 @@ public record Game(
         Date created,
         @LastModifiedDate
         Date lastModified,
+        @CreatedBy
+        String creator,
+        @LastModifiedBy
+        String lastModifier,
         @Version
         int version
 ) {
         public static Game of(String gameId, String title, GameGenre genre, String publisher, double price) {
-                return new Game(null, gameId, title, genre, publisher, price, null, null, 0);
+                return new Game(null, gameId, title, genre, publisher, price, null, null, null, null, 0);
         }
 }

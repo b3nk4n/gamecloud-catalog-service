@@ -3,7 +3,6 @@ package de.b3nk4n.gamecloud.catalogservice;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dasniko.testcontainers.keycloak.KeycloakContainer;
-import de.b3nk4n.gamecloud.catalogservice.config.SecurityConfig;
 import de.b3nk4n.gamecloud.catalogservice.model.Game;
 import de.b3nk4n.gamecloud.catalogservice.model.GameGenre;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -91,7 +89,8 @@ class CatalogServiceApplicationTest {
                 .expectStatus().isCreated()
                 .expectBody(Game.class).value(actualGame -> {
                     assertThat(actualGame)
-                            .usingRecursiveComparison().ignoringFields("id", "created", "lastModified", "version")
+                            .usingRecursiveComparison()
+                            .ignoringFields("id", "created", "lastModified", "creator", "lastModifier", "version")
                             .isEqualTo(expectedGame);
                     assertThat(actualGame.id()).isNotNull();
                     assertThat(actualGame.created()).isNotNull();

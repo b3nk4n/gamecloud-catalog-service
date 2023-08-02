@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.UUID;
@@ -49,5 +50,32 @@ class GameRepositoryTest {
 
         assertThat(actual).isPresent();
         assertThat(actual.get().id()).isEqualTo(createdGame.id());
+    }
+
+    @Test
+    void whenCreateGameNotAuthenticatedThenNoAuditData() {
+        final var game = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+
+        final var savedGame = gameRepository.save(game);
+
+        assertThat(savedGame.creator()).isNull();
+        assertThat(savedGame.lastModifier()).isNull();
+        assertThat(savedGame.created()).isNotNull();
+        assertThat(savedGame.lastModified()).isNotNull();
+        assertThat(savedGame.version()).isEqualTo(1L);
+    }
+
+    @Test
+    @WithMockUser(username = "b3nk4n")
+    void whenCreateGameAuthenticatedThenNoAuditData() {
+        final var game = Game.of("1234", "FIFA 23", GameGenre.SPORTS, "EA Sports", 39.99);
+
+        final var savedGame = gameRepository.save(game);
+
+        assertThat(savedGame.creator()).isEqualTo("b3nk4n");
+        assertThat(savedGame.lastModifier()).isEqualTo("b3nk4n");
+        assertThat(savedGame.created()).isNotNull();
+        assertThat(savedGame.lastModified()).isNotNull();
+        assertThat(savedGame.version()).isEqualTo(1L);
     }
 }
