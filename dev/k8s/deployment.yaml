@@ -35,3 +35,5 @@ spec:
               value: http://config-service
             - name: SPRING_PROFILES_ACTIVE
               value: demo
+            - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
+              value: http://gamecloud-keycloak/realms/GameCloud

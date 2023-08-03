@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integrationtest")
 @Tag("IntegrationTest")
-@Testcontainers // Activates automatic startup and cleanup of test containers
+@Testcontainers // Activates automatic startup and cleanup of test containers when not declared as static
 class CatalogServiceApplicationTest {
 
     /**
