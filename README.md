@@ -219,3 +219,17 @@ And the validation can be performed as follows.
 ```bash
 kubeval --strict -d dev/k8s
 ```
+
+### Docker Compose
+
+A gotcha with `docker-compose` when using the `latest` tag only is that a previously used image might be reused, even when a new
+version is available. At least when `docker-compose down` is not invoked explicitely.
+
+The latest image versions can be pulled using the following sequence of commands:
+
+```bash
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+```
